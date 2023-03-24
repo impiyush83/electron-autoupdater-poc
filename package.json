@@ -1,0 +1,32 @@
+{
+  "name": "electron-explore",
+  "version": "1.0.0",
+  "description": "Electron JS AutoUpdater Module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "install-app-dep"
+  },
+  "build": {
+    "appId": "Hello Apache",
+    "productName": "Apache",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "identity": null
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.1.4",
+    "electron-builder": "^24.1.0"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^5.0.0-beta.16",
+    "electron-updater": "^5.3.0"
+  }
+}
