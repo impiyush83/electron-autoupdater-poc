@@ -11,11 +11,22 @@
     "postinstall": "install-app-dep"
   },
   "build": {
-    "appId": "Hello Apache",
-    "productName": "Apache",
+    "appId": "com.apache.electron-explore",
+    "productName": "ApacheAiravataElectronAutoUpdaterPoc",
+    "publish": [
+      {
+        "provider": "github",
+        "repo": "electron-autoupdater-poc",
+        "owner": "impiyush83"
+      }
+    ],
     "mac": {
       "category": "public.app-category.productivity",
-      "identity": null
+      "identity": null,
+      "target": [
+        "dmg",
+        "zip"
+      ]
     }
   },
   "author": "",

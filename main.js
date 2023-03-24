@@ -1,11 +1,9 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 const { autoUpdater } = require("electron-updater")
 const isDev = require('electron-is-dev');
 
-
 autoUpdater.logger = require('electron-log')
 autoUpdater.logger.transports.file.level = 'info'
-
 
 autoUpdater.on('checking-for-update', () => {
     console.log('Checking updates....')
@@ -17,13 +15,24 @@ autoUpdater.on('update-available', (info) => {
     console.log('ReleaseDate', info.releaseDate)
 })
 
-
 autoUpdater.on('download-progress', (progress) => {
-    console.log(`Progress ${Math.floor(progress.percent)}`)
+    console.log(`Download in progress ${Math.floor(progress.percent)} out of 100`)
 })
 
 autoUpdater.on('update-downloaded', (info) => {
-    console.log('update downloaded')
+    const dialogOpts = {
+        type: 'info',
+        buttons: ['Restart', 'Later'],
+        title: 'Application Update',
+        message: info,
+        detail:
+            'A new version has been downloaded. Restart the application to apply the updates.',
+    }
+    
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+        console.log(`Installing new application of version ${info.version}}`)
+        if (returnValue.response === 0) autoUpdater.quitAndInstall()
+    })
     autoUpdater.quitAndInstall()
 })
 
@@ -31,6 +40,15 @@ autoUpdater.on('update-downloaded', (info) => {
 autoUpdater.on('error', (error) => {
     console.error(error);
 })
+
+
+// check for updates every 1 minute
+setInterval(() => {
+    console.log('Checking for updates and install it if its a production app')
+    if (!isDev) {
+        autoUpdater.checkForUpdates();
+    }
+}, 60000)
 
 
 const createWindow = () => {
@@ -42,9 +60,6 @@ const createWindow = () => {
 }
 
 app.on('ready', () => {
-    if (!isDev) {
-        autoUpdater.checkForUpdates();
-    }
     createWindow()
 })
 
