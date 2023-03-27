@@ -27,7 +27,7 @@
       "identity": null,
       "target": [
         "dmg",
-        "zip"
+        "pkg"
       ]
     }
   },
