@@ -10,7 +10,8 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "postinstall": "install-app-dep"
+    "build": "electron-builder -w",
+    "release": "electron-builder -m -p 'always'"
   },
   "build": {
     "appId": "com.apache.electron-explore",
@@ -35,7 +36,10 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^23.1.4",
-    "electron-builder": "^24.1.0"
+    "electron-builder": "^24.1.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^5.0.0-beta.16",
+    "electron-updater": "^5.3.0"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0",
